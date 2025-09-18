@@ -9,9 +9,9 @@ import {
 import { Effect, Layer, Schema } from "effect";
 
 const Api = HttpApi.make("myApi").add(
-	HttpApiGroup.make("group").add(
-		HttpApiEndpoint.get("get", "/api/hello").addSuccess(Schema.String),
-	),
+	HttpApiGroup.make("group")
+		.add(HttpApiEndpoint.get("get", "/").addSuccess(Schema.String))
+		.prefix("/api"),
 );
 
 const groupLive = HttpApiBuilder.group(Api, "group", (handlers) =>
