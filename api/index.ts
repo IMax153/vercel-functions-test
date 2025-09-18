@@ -14,16 +14,16 @@ const Api = HttpApi.make("myApi").add(
 		.prefix("/api"),
 );
 
-const groupLive = HttpApiBuilder.group(Api, "group", (handlers) =>
+const GroupLayer = HttpApiBuilder.group(Api, "group", (handlers) =>
 	handlers.handle("get", () => Effect.succeed("Hello, world!")),
 );
 
-const MyApiLive = HttpApiBuilder.api(Api).pipe(Layer.provide(groupLive));
+const MyApiLayer = HttpApiBuilder.api(Api).pipe(Layer.provide(GroupLayer));
 
-const ScalarLayer = HttpApiScalar.layer().pipe(Layer.provide(MyApiLive));
+const ScalarLayer = HttpApiScalar.layer().pipe(Layer.provide(MyApiLayer));
 
 const MainLayer = Layer.mergeAll(
-	MyApiLive,
+	MyApiLayer,
 	ScalarLayer,
 	HttpServer.layerContext,
 );
