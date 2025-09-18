@@ -36,8 +36,5 @@ process.on("SIGTERM", () => {
 });
 
 export default {
-	fetch: (request) => {
-		console.log(request);
-		return handler(request);
-	},
+	fetch: handler,
 };
