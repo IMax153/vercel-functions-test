@@ -20,7 +20,9 @@ const GroupLayer = HttpApiBuilder.group(Api, "group", (handlers) =>
 
 const ApiLayer = HttpApiBuilder.api(Api).pipe(Layer.provide(GroupLayer));
 
-const ScalarLayer = HttpApiScalar.layer().pipe(Layer.provide(ApiLayer));
+const ScalarLayer = HttpApiScalar.layer({
+	path: "/api/docs",
+}).pipe(Layer.provide(ApiLayer));
 
 const MainLayer = Layer.mergeAll(
 	ApiLayer,
