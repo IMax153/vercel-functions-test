@@ -2,6 +2,12 @@
   "regions": [
     "iad1"
   ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    }
+  ],
   "functions": {
     "api/*": {
       "supportsCancellation": true
